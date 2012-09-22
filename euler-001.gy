@@ -1,0 +1,5 @@
+#/usr/bin/env gp
+
+a=1+1
+print(a)
+
