@@ -1,2 +1,2 @@
-*.gy => Groovy files (http://groovy.codehaus.org)
-*.gp => PARI/GP files (http://pari.math.u-bordeaux.fr/)
+ * __*.gy__ => Groovy files (http://groovy.codehaus.org)
+ * __*.gp__ => PARI/GP files (http://pari.math.u-bordeaux.fr/)
