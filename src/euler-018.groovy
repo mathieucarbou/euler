@@ -8,10 +8,14 @@ import org.jgrapht.alg.BellmanFordShortestPath
 import org.jgrapht.experimental.dag.DirectedAcyclicGraph
 import org.jgrapht.graph.DefaultWeightedEdge
 
+// just because the problem 67 is the same, so the code is re-used
+def TRIANGLE = args.length ? args[0] : '../data/euler-018.txt'
+
 def graph = new DirectedAcyclicGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge)
 graph.addVertex('root')
 
-def lines = new File('../data/euler-018.txt').readLines()
+def lines = new File(TRIANGLE).readLines()
+
 for (int row = lines.size() - 1; row >= 0; row--) {
     lines[row].split(' ').eachWithIndex {weight, col ->
         def vertex = "(${row},${col})" as String
