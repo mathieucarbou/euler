@@ -5,26 +5,26 @@
  */
 
 import org.jgrapht.alg.BellmanFordShortestPath
-import org.jgrapht.graph.DefaultDirectedWeightedGraph
+import org.jgrapht.experimental.dag.DirectedAcyclicGraph
 import org.jgrapht.graph.DefaultWeightedEdge
 
-def graph = new DefaultDirectedWeightedGraph(DefaultWeightedEdge)
-graph.addVertex("START")
+def graph = new DirectedAcyclicGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge)
+graph.addVertex('root')
 
 def lines = new File('../data/euler-018.txt').readLines()
 for (int row = lines.size() - 1; row >= 0; row--) {
     lines[row].split(' ').eachWithIndex {weight, col ->
-        def vertex = "(${row},${col})"
+        def vertex = "(${row},${col})" as String
         graph.addVertex(vertex)
         if (row == lines.size() - 1) {
-            graph.addEdge("START": "(${row + 1},${col})", vertex, -(weight as int))
+            graph.setEdgeWeight(graph.addDagEdge('root' as String, vertex), -(weight as int))
         } else {
-            graph.addEdge("(${row + 1},${col})", vertex, -(weight as int))
-            graph.addEdge("(${row + 1},${col + 1})", vertex, -(weight as int))
+            graph.setEdgeWeight(graph.addDagEdge("(${row + 1},${col})" as String, vertex), -(weight as int))
+            graph.setEdgeWeight(graph.addDagEdge("(${row + 1},${col + 1})" as String, vertex), -(weight as int))
         }
     }
 }
 
-def path = new BellmanFordShortestPath(graph, "START")
-println(-path.getCost("(0,0)"))
-path.getPathEdgeList("(0,0)").each {print it}
+def path = new BellmanFordShortestPath<String, DefaultWeightedEdge>(graph, 'root' as String)
+println(-path.getCost('(0,0)' as String))
+path.getPathEdgeList('(0,0)' as String).each {print it}
