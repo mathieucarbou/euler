@@ -1,12 +1,4 @@
 /*
-    Digit decomposition of n in base b in order
-*/
-digitsrev(n, b=10) =
-{
-    return(Vecrev(digits(n,b)))
-}
-
-/*
     Digit decomposition of n in base b by ascending order of b exponents. I.e. digits(12345) == [5,4,3,2,1]
 */
 digits(n, b=10) =
@@ -14,7 +6,7 @@ digits(n, b=10) =
     my(l=List(),qr=[n,0]);
     if(n==0, return([0]));
     while(qr[1], qr=divrem(qr[1],b); listput(l,qr[2]));
-    return(Vec(l));
+    return(Vecrev(l));
 }
 
 /*
@@ -53,7 +45,7 @@ factoradic(n, b=10) =
     Generates the n-th permutation (from 0 to base! - 1, as a row vector of length base)
     of the numbers 0 to base-1. The number n is taken modulo base!.
 */
-numtoperm2(base, n) =
+numtoperm2(n, base=10) =
 {
     my( v=vector(base), digits=List(vector(base,i,i-1)), f=factoradic(n, base) );
     for(i=1, base, v[i]=digits[f[i]+1]; listpop(digits, f[i]+1) );
