@@ -70,3 +70,16 @@ cycle(n) =
     );
     return([0, 0]);
 }
+
+/*
+    Compute the number of ways of making a number n with the given exponent values v
+*/
+nsumexp(n, v=[]) =
+{
+    my(w);
+    if(#v==0, return(1));
+    w=vector(n+1);
+    w[1]=1;
+    for(i=1,#v, for(j=v[i],n, w[j+1]+=w[j-v[i]+1]));
+    return(w[n+1]);
+}
