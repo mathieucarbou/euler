@@ -1,5 +1,15 @@
 /*
-    Digit decomposition of n in base b by ascending order of b exponents. I.e. digits(12345) == [5,4,3,2,1]
+    Digit decomposition of n in base b by ascending order of b exponents. I.e. digits(12345) == [1,2,3,4,5]
+*/
+vectonum(v, b=10) =
+{
+    my(n=0);
+    for(i=1,#v, n+=v[i]*b^(#v-i));
+    return(n);
+}
+
+/*
+    Digit decomposition of n in base b by ascending order of b exponents. I.e. digits(12345) == [1,2,3,4,5]
 */
 digits(n, b=10) =
 {
