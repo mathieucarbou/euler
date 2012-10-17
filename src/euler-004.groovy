@@ -13,4 +13,4 @@ for (i in 999..100) {
             palindromes << i * j
     }
 }
-println palindromes.sort().reverse()
+println palindromes.sort().last()

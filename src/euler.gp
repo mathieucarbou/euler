@@ -9,17 +9,6 @@ vectonum(v, b=10) =
 }
 
 /*
-    Digit decomposition of n in base b by ascending order of b exponents. I.e. digits(12345) == [1,2,3,4,5]
-*/
-digits(n, b=10) =
-{
-    my(l=List(),qr=[n,0]);
-    if(n==0, return([0]));
-    while(qr[1], qr=divrem(qr[1],b); listput(l,qr[2]));
-    return(Vecrev(l));
-}
-
-/*
     Number of digits of n in base b
 */
 ndigits(n, b=10) =
@@ -28,16 +17,6 @@ ndigits(n, b=10) =
     if(n==0, return(1));
     while(n, n=n\b; c++);
     return(c);
-}
-
-/*
-    Sum of digits of n in base b
-*/
-sumdigits(n, b=10) =
-{
-    my(s=0,qr=[n, 0]);
-    while(qr[1], qr=divrem(qr[1],b); s+=qr[2]);
-    return(s);
 }
 
 /*
@@ -57,8 +36,8 @@ factoradic(n, b=10) =
 */
 numtoperm2(n, base=10) =
 {
-    my( v=vector(base), digits=List(vector(base,i,i-1)), f=factoradic(n, base) );
-    for(i=1, base, v[i]=digits[f[i]+1]; listpop(digits, f[i]+1) );
+    my( v=vector(base), d=List(vector(base,i,i-1)), f=factoradic(n, base) );
+    for(i=1, base, v[i]=d[f[i]+1]; listpop(d, f[i]+1) );
     return (v);
 }
 
@@ -82,7 +61,7 @@ cycle(n) =
 }
 
 /*
-    Compute the number of ways of making a number n with the given values v
+    Compute the number of ways of making a number n with the sum of given values v
 */
 nsumexp(n, v=[]) =
 {

@@ -5,12 +5,14 @@
 \r euler.gp
 {
     m=[142857, 6];
+    mp=0;
     forprime(p=2,1000,
         c=cycle(p);
         if(c[2] > m[2],
             m=c;
-            print("1/" p " : " m);
+            mp=p;
         );
-    )
+    );
+    print(mp);
 }
 \q

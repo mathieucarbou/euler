@@ -30,5 +30,5 @@ for (int row = lines.size() - 1; row >= 0; row--) {
 }
 
 def path = new BellmanFordShortestPath<String, DefaultWeightedEdge>(graph, 'root' as String)
-println(-path.getCost('(0,0)' as String))
-path.getPathEdgeList('(0,0)' as String).each {print it}
+println(-path.getCost('(0,0)' as String) as int)
+//path.getPathEdgeList('(0,0)' as String).each {println it}

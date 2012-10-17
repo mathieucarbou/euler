@@ -25,12 +25,12 @@
             for(c=b+1,9,
                 if((10*b + a) / (10*a + c) == b/c || (10*a + b) / (10*c + a) == b/c,
                     p*=b/c;
-                    print(10*b + a "/" 10*a + c " = " b "/" c);
+                    /*print(10*b + a "/" 10*a + c " = " b "/" c);*/
                 )
             )
         )
     );
-    print("=> " denominator(p));
+    print(denominator(p));
 }
 
 \q
