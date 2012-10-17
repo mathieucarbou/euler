@@ -7,5 +7,6 @@
 
 v=vector(10,i,(i-1)!)
 print(v)
+print(sum(i=1,#v,v[i]))
 
 \q
