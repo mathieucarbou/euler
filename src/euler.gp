@@ -82,7 +82,7 @@ cycle(n) =
 }
 
 /*
-    Compute the number of ways of making a number n with the given exponent values v
+    Compute the number of ways of making a number n with the given values v
 */
 nsumexp(n, v=[]) =
 {
