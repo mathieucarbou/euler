@@ -3,5 +3,5 @@
 */
 
 \r euler.gp
-print(vectonum(numtoperm2(1000000-1, 10)))
+print(vectonum(mynumtoperm(1000000-1)))
 \q

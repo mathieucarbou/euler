@@ -5,8 +5,6 @@
 
 \r euler.gp
 
-v=vector(10,i,(i-1)!)
-print(v)
-print(sum(i=1,#v,v[i]))
+print(vectonum([1,2,3,4]))
 
 \q
