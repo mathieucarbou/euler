@@ -54,7 +54,7 @@ cycle(n) =
 /*
     Compute the number of ways of making a number n with the sum of given values v
 */
-nsumexp(n, v=[]) =
+ncombsum(n, v=[]) =
 {
     my(w);
     if(#v==0, return(1));
