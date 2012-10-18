@@ -5,6 +5,8 @@
 
 \r euler.gp
 
-print(vectonum([1,2,3,4]))
+b=vector(10,i,(i-1)!)
+
+print(b)
 
 \q
