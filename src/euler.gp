@@ -1,23 +1,21 @@
 /*
     Recomposition of n in base b by exponents. I.e. vectonum([1,2,3,4,5]) == 12345
 */
-vectonum(v, b=10) = return(subst(Pol(v),'x,b))
+vectonum(v, b=10) = return(subst(Pol(v),'x,b));
 
 /*
     Permutation number k (mod n!) of n letters (n C-integer).
 */
-mynumtoperm(n, k) = return(Vec(Vecsmall(numtoperm(n,k))^(-1)*vectorsmall(n,i,n+1-i)))
+mynumtoperm(n, k) = return(Vec(Vecsmall(numtoperm(n,k))^(-1)*vectorsmall(n,i,n+1-i)));
 
 /*
     Number of digits of n in base b
 */
 ndigits(n, b=10) =
 {
-    my(c=0);
     if(n==0, return(0));
-    if(b=10, return(#Str(n)));
-    while(n, n=n\b; c++);
-    return(c);
+    if(b==10, return(#Str(n)));
+    return(1+floor(log(n)/log(b)));
 }
 
 /*
