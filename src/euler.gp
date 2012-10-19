@@ -4,12 +4,17 @@
 vectonum(v, b=10) = return(subst(Pol(v),'x,b))
 
 /*
+    Permutation number k (mod n!) of n letters (n C-integer).
+*/
+mynumtoperm(n, k) = return(Vec(Vecsmall(numtoperm(n,k))^(-1)*vectorsmall(n,i,n+1-i)))
+
+/*
     Number of digits of n in base b
 */
 ndigits(n, b=10) =
 {
     my(c=0);
-    if(n==0, return(1));
+    if(n==0, return(0));
     if(b=10, return(#Str(n)));
     while(n, n=n\b; c++);
     return(c);
@@ -21,16 +26,11 @@ ndigits(n, b=10) =
 */
 factoradic(n, b=10) =
 {
+    if(n==0, return(0));
     my(v=vector(b), qr=[0,n%(b!)]);
     for(i=1, b, qr=divrem(qr[2], (b-i)!); v[i]=qr[1]);
-    return(v);
+    return(vectonum(v, b));
 }
-
-/*
-    Generates the n-th permutation (from 0 to base! - 1, as a row vector of length base)
-    of the numbers 0 to base-1. The number n is taken modulo base!.
-*/
-mynumtoperm(n, base=10) = return(apply(x->x-1, Vec(Vecsmall(numtoperm(base,n))^(-1)*vectorsmall(base,i,base+1-i))))
 
 /*
     Get the recurring cycle of the inverse of this number 1/n.
