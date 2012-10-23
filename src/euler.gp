@@ -87,9 +87,13 @@ binarySearch(l, v) =
 */
 pythagoreans(p) =
 {
-    my();
-    for(m=2, ceil(sqrt(1+2*p)/2),
+    my(pp);
+    if(p%2!=0, return([]));
+    pp=p\2;
+    forprime(m=2, ceil(sqrt(1+2*p)/2),
+        if(pp%m==0,
 
+        );
     );
 }
 
@@ -110,14 +114,16 @@ pythagoreans(p) =
     a^2 + b^2 = c^2
 
     2*k*m^2 + 2*k*m*n = p
-    2*k*m * (m + n) = p
+        => 2*k*m * (m + n) = p
+        => p%2=0 (p must be even)
+        => p'=p/2, so  k * m * (m + n) = p'
+        => p'%k=0, p'%m=0, p'%(m+n)=0
 
-        => p%2=0, p%k=0, p%m=0, p%(m+n)=0
-        => 2*m*(m+1)=p =>2*m^2+2m-p=0
+    if n=1, k=1, p'=p/2: m^2 + m - p' = 0
+        => 1 < m < floor(0.5 + sqrt(0.25 + p'))
 
-    if n=1, k=1: 2*m^2 + 2*m - p = 0
 
-        => 1 < m < sqrt(1+2*p)/2
+
 
 List<IntTriplet> set = new ArrayList<IntTriplet>();
 sum >>>= 1;
