@@ -27,6 +27,6 @@
 
 \r euler.gp
 
-print(pythagoreans(120))
+forstep(x=2,1000,2,print("x: " pythagoreans(x)))
 
 \q

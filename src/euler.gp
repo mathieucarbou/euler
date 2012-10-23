@@ -87,45 +87,43 @@ binarySearch(l, v) =
 */
 pythagoreans(p) =
 {
-    my(pp);
+    my(l,m_max,kmn);
     if(p%2!=0, return([]));
-    pp=p\2;
-    forprime(m=2, ceil(sqrt(1+2*p)/2),
-        if(pp%m==0,
+    p=p\2;
+    l=List();
+    m_max=floor(sqrt(0.25 + p))-0.5);
+    fordiv(p, m,
+        if(m > m_max, break());
+        kmn=p\m;
 
-        );
+        n_min=1;
+        if(p%2, n_min=2);
+
+        forstep(n=1,)
     );
+    return(Set(l));
 }
 
 /*
-
-    If p is the perimeter of a right angle triangle with integral length sides, {a,b,c},
-    there are exactly three solutions for p = 120. {20,48,52}, {24,45,51}, {30,40,50}
-
     http://en.wikipedia.org/wiki/Pythagorean_triple
 
     a = k*(m^2 - n^2)
     b = k*2*m*n
     c = k*(m^2 + n^2)
 
-    arbitrary pair of positive integers m and n with m > n and m > 1
+    m, n: arbitrary pair of positive coprime integers with m > n and n >= 1
 
     a + b + c = p
-    a^2 + b^2 = c^2
+    2*k*m * (m + n) = p
+        => p must be even (p%2=0)
 
-    2*k*m^2 + 2*k*m*n = p
-        => 2*k*m * (m + n) = p
-        => p%2=0 (p must be even)
-        => p'=p/2, so  k * m * (m + n) = p'
-        => p'%k=0, p'%m=0, p'%(m+n)=0
+    p'=p/2
+    k*m*(m + n) = p'
+        => p'%m=0
 
-    if n=1, k=1, p'=p/2: m^2 + m - p' = 0
-        => 1 < m < floor(0.5 + sqrt(0.25 + p'))
+    if n=1, k=1, m^2 + m - p' = 0
+        => 1 < m < floor(sqrt(0.25 + p'))-0.5)
 
-
-
-
-List<IntTriplet> set = new ArrayList<IntTriplet>();
 sum >>>= 1;
 for (int m = 2, max = (int) (Math.sqrt(sum) + 1); m < max; m++) {
     if (sum % m == 0) {
