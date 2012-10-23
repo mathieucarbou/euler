@@ -10,9 +10,8 @@
 
     arbitrary pair of positive integers m and n with m > n and m > 1
 
-    dividing a, b, and c by 2 will yield a primitive triple if m and n are coprime
-
     a + b + c = p
+    a^2 + b^2 = c^2
 
     2*k*m^2 + 2*k*m*n = p
     2*k*m * (m + n) = p
@@ -26,28 +25,8 @@
 
 */
 
-{
+\r euler.gp
 
-}
+print(pythagoreans(120))
 
 \q
-
-/*
-List<IntTriplet> set = new ArrayList<IntTriplet>();
-sum >>>= 1;
-for (int m = 2, max = (int) (Math.sqrt(sum) + 1); m < max; m++) {
-    if (sum % m == 0) {
-        int sm = sum / m;
-        while ((sm & 1) == 0) sm >>>= 1;
-        for (int k = (m & 1) == 1 ? m + 2 : m + 1, m2 = m << 1; k < m2 && k <= sm; k += 2) {
-            if (sm % k == 0 && Divisors.gcd(k, m) == 1) {
-                int d = sum / (k * m);
-                int n = k - m;
-                set.add(IntTriplet.of(d * (m * m - n * n), (d * m * n) << 1, d * (m * m + n * n)));
-            }
-            k += 2;
-        }
-    }
-}
-return set;
-*/
