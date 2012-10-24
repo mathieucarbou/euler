@@ -87,57 +87,24 @@ binarySearch(l, v) =
 */
 pythagoreans(p) =
 {
-    my(l,m_max,kmn);
+    my(l,m_max,dk,d,k_max,n);
     if(p%2!=0, return([]));
-    p=p\2;
+    p=p/2;
     l=List();
-    m_max=floor(sqrt(0.25 + p))-0.5);
+    m_max=floor(sqrt(0.25+p)-0.5);
     fordiv(p, m,
         if(m > m_max, break());
-        kmn=p\m;
-
-        n_min=1;
-        if(p%2, n_min=2);
-
-        forstep(n=1,)
+        dk=p/m;
+        while(dk%2==0, dk=dk/2);
+        k_max=2*m;
+        fordiv(dk, k,
+            if(k>=k_max, break());
+            if(k>m && k%2==1 && gcd(m,k)==1,
+                n=k-m;
+                d=p/(k*m);
+                listput(l, [d*(m^2-n^2), 2*d*m*n, d*(m^2+n^2)]);
+            );
+        );
     );
     return(Set(l));
 }
-
-/*
-    http://en.wikipedia.org/wiki/Pythagorean_triple
-
-    a = k*(m^2 - n^2)
-    b = k*2*m*n
-    c = k*(m^2 + n^2)
-
-    m, n: arbitrary pair of positive coprime integers with m > n and n >= 1
-
-    a + b + c = p
-    2*k*m * (m + n) = p
-        => p must be even (p%2=0)
-
-    p'=p/2
-    k*m*(m + n) = p'
-        => p'%m=0
-
-    if n=1, k=1, m^2 + m - p' = 0
-        => 1 < m < floor(sqrt(0.25 + p'))-0.5)
-
-sum >>>= 1;
-for (int m = 2, max = (int) (Math.sqrt(sum) + 1); m < max; m++) {
-    if (sum % m == 0) {
-        int sm = sum / m;
-        while ((sm & 1) == 0) sm >>>= 1;
-        for (int k = (m & 1) == 1 ? m + 2 : m + 1, m2 = m << 1; k < m2 && k <= sm; k += 2) {
-            if (sm % k == 0 && Divisors.gcd(k, m) == 1) {
-                int d = sum / (k * m);
-                int n = k - m;
-                set.add(IntTriplet.of(d * (m * m - n * n), (d * m * n) << 1, d * (m * m + n * n)));
-            }
-            k += 2;
-        }
-    }
-}
-return set;
-*/
