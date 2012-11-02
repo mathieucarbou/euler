@@ -26,37 +26,20 @@
 
     1 <= d1 <= 9
 
-    find m=d3d4d5d6 then find n=d6d7d8d9d10
-
 */
 
 {
-    lm=List();
-    b1=Set(vector(10,i,i-1));
-    b2=Set([0,5]);
-    forstep(m=021,987,3,
-        d4=(m\10)%10;
-        if(d4%2==0,
-            d3=m\100;
-            if(d3 != d4,
-                d5=m%10;
-                if(d3 != d5 && d4 != d5,
-                    i=setintersect(Set([d3, d4, d5]), b2);
-                    if(#i==0,
-                        listput(lm, [d3, d4, d5, 0]);
-                        listput(lm, [d3, d4, d5, 5]),
-                        if(#i==1,
-                            if(i[1]==0,
-                                listput(lm, [d3, d4, d5, 5]),
-                                listput(lm, [d3, d4, d5, 0]);
-                            );
-                        );
-                    );
-                );
+    s=0;
+    for(k=0, 10!-1,
+        d=numtoperm(10,k);
+        if(d[1]!=1 && d[8]>1 && (d[6]==1 || d[6]==6) && d[4]%2,
+            d=apply(x->x-1, d);
+            if((d[3]+d[4]+d[5])%3==0 && (d[5]*100+d[6]*10+d[7])%7==0 && (d[6]-d[7]+d[8])%11==0 && (d[9]-3*d[8]-4*d[7])%13==0 && (d[8]*100+d[9]*10+d[10])%17==0,
+                s+=subst(Pol(d),'x,10);
             );
         );
     );
-    print(lm);
+    print(s);
 }
 
 \q
