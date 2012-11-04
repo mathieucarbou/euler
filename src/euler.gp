@@ -120,3 +120,27 @@ ispentagonal(x) =
     qr=divrem(qr,6);
     if(qr[2]==0, return(qr[1]), return(0));
 }
+
+/*
+    Check if x = h(n) = n is hexagonal and returns n or 0 if not.
+*/
+ishexagonal(x) =
+{
+    my(qr=8*x+1);
+    if(!issquare(qr), return(0));
+    qr=truncate(sqrt(qr))+1;
+    qr=divrem(qr,4);
+    if(qr[2]==0, return(qr[1]), return(0));
+}
+
+/*
+    Check if x = t(n) = n is triangular and returns n or 0 if not.
+*/
+istriangular(x) =
+{
+    my(qr=8*x+1);
+    if(!issquare(qr), return(0));
+    qr=truncate(sqrt(qr))-1;
+    qr=divrem(qr,2);
+    if(qr[2]==0, return(qr[1]), return(0));
+}
