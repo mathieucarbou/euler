@@ -108,3 +108,15 @@ pythagoreans(p) =
     );
     return(Set(l));
 }
+
+/*
+    Check if x = p(n) = n is pentagonal and returns n or 0 if not.
+*/
+ispentagonal(x) =
+{
+    my(qr=24*x+1);
+    if(!issquare(qr), return(0));
+    qr=truncate(sqrt(qr))+1;
+    qr=divrem(qr,6);
+    if(qr[2]==0, return(qr[1]), return(0));
+}
