@@ -1,3 +1,4 @@
+long wtime = System.currentTimeMillis()
 new File(".").eachFile {
     if (!(it.name in ['all.groovy', 'euler.groovy', 'euler.gp'])) {
         if (it.name.endsWith('.groovy')) {
@@ -5,7 +6,7 @@ new File(".").eachFile {
             long time = System.currentTimeMillis()
             run(it)
             time = System.currentTimeMillis() - time
-            if(time >= 1000) println("  |-- ${time} ms")
+            if(time >= 1000) println("  |-- ${time.toString().padLeft(6, '_')} ms")
         } else if (it.name.endsWith('.gp')) {
             print("[GP] ${it.name[0..-4]} ==> ")
             long time = System.currentTimeMillis()
@@ -13,7 +14,8 @@ new File(".").eachFile {
             proc.waitFor()
             time = System.currentTimeMillis() - time
             print (proc.inputStream.text ?: proc.errorStream.text)
-            if(time >= 1000) println("  |-- ${time} ms")
+            if(time >= 1000) println("  |-- ${time.toString().padLeft(6, '_')} ms")
         }
     }
 }
+println("${System.currentTimeMillis() - wtime} ms")

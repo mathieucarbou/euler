@@ -1,19 +1,8 @@
 /*
-    9*9! = 3265920 => maximum
+    http://en.wikipedia.org/wiki/Factorion
+    => There are just four factorions (in base 10) and they are 1, 2, 145 and 40585 (sequence A014080 in OEIS).
 */
 
 \r euler.gp
-
-{
-    v=vector(10,i,(i-1)!);
-    c=0;
-    for(n=3, 3265920,
-        f=0;
-        d=digits(n);
-        for(i=1, #d, f+=v[d[i]+1]);
-        if(n==f, c+=n);
-    );
-    print(c);
-}
-
+print(40585+145);
 \q
