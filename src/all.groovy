@@ -1,3 +1,4 @@
+def gp = System.getProperty('os.name').toLowerCase().contains('windows') ? 'gp-2.6.exe' : 'gp'
 long wtime = System.currentTimeMillis()
 new File(".").eachFile {
     if (!(it.name in ['all.groovy', 'euler.groovy', 'euler.gp'])) {
@@ -10,7 +11,7 @@ new File(".").eachFile {
         } else if (it.name.endsWith('.gp')) {
             print("[GP] ${it.name[0..-4]} ==> ")
             long time = System.currentTimeMillis()
-            def proc = ['gp-2.6.exe', '-q', '-s', '30M', '-p', '2M', it.name].execute()
+            def proc = [gp, '-q', '-s', '30M', '-p', '2M', it.name].execute()
             proc.waitFor()
             time = System.currentTimeMillis() - time
             print (proc.inputStream.text ?: proc.errorStream.text)
