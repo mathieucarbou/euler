@@ -1,7 +1,7 @@
 def gp = System.getProperty('os.name').toLowerCase().contains('windows') ? 'gp-2.6.exe' : 'gp'
 long wtime = System.currentTimeMillis()
 new File(".").eachFile {
-    if (!(it.name in ['all.groovy', 'euler.groovy', 'euler.gp'])) {
+    if (!(it.name in ['all.groovy', 'euler.groovy', 'euler.gp', 'map.gp'])) {
         if (it.name.endsWith('.groovy')) {
             print("[GY] ${it.name[0..-8]} ==> ")
             long time = System.currentTimeMillis()
