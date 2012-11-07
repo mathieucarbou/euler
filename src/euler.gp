@@ -1,12 +1,12 @@
 /*
     Recomposition of n in base b by exponents. I.e. vectonum([1,2,3,4,5]) == 12345
 */
-vectonum(v, b=10) = return(subst(Pol(v),'x,b));
+vectonum(v, b=10) = subst(Pol(v),'x,b);
 
 /*
     Permutation number k (mod n!) of n letters (n C-integer).
 */
-mynumtoperm(n, k) = return(Vec(Vecsmall(numtoperm(n,k))^(-1)*vectorsmall(n,i,n+1-i)));
+mynumtoperm(n, k) = Vec(Vecsmall(numtoperm(n,k))^(-1)*vectorsmall(n,i,n+1-i));
 
 /*
     Number of digits of n in base b
@@ -15,7 +15,7 @@ ndigits(n, b=10) =
 {
     if(n==0, return(0));
     if(b==10, return(#Str(n)));
-    return(1+floor(log(n)/log(b)));
+    1+floor(log(n)/log(b));
 }
 
 /*
@@ -27,7 +27,7 @@ factoradic(n, b=10) =
     if(n==0, return(0));
     my(v=vector(b), qr=[0,n%(b!)]);
     for(i=1, b, qr=divrem(qr[2], (b-i)!); v[i]=qr[1]);
-    return(vectonum(v, b));
+    vectonum(v, b);
 }
 
 /*
@@ -46,7 +46,7 @@ cycle(n) =
         qr=divrem(p,n);
         if(qr[2]==1, return([qr[1], l]));
     );
-    return([0, 0]);
+    [0, 0];
 }
 
 /*
@@ -59,7 +59,7 @@ ncombsum(n, v=[]) =
     w=vector(n+1);
     w[1]=1;
     for(i=1,#v, for(j=v[i],n, w[j+1]+=w[j-v[i]+1]));
-    return(w[n+1]);
+    w[n+1];
 }
 
 /*
@@ -78,7 +78,7 @@ binarySearch(l, v) =
         mv=l[mid];
         if(mv<v, low=mid+1, if (mv>key, high=mid-1, return (mid)));
     );
-    return -(low + 1);
+    -(low + 1);
 }
 
 /*
@@ -106,7 +106,7 @@ pythagoreans(p) =
             );
         );
     );
-    return(Set(l));
+    Set(l);
 }
 
 /*
@@ -118,7 +118,7 @@ ispentagonal(x) =
     if(!issquare(qr), return(0));
     qr=truncate(sqrt(qr))+1;
     qr=divrem(qr,6);
-    if(qr[2]==0, return(qr[1]), return(0));
+    if(qr[2]==0, qr[1], 0);
 }
 
 /*
@@ -130,7 +130,7 @@ ishexagonal(x) =
     if(!issquare(qr), return(0));
     qr=truncate(sqrt(qr))+1;
     qr=divrem(qr,4);
-    if(qr[2]==0, return(qr[1]), return(0));
+    if(qr[2]==0, qr[1], 0);
 }
 
 /*
@@ -142,5 +142,5 @@ istriangular(x) =
     if(!issquare(qr), return(0));
     qr=truncate(sqrt(qr))-1;
     qr=divrem(qr,2);
-    if(qr[2]==0, return(qr[1]), return(0));
+    if(qr[2]==0, qr[1], 0);
 }
