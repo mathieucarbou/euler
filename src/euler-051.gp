@@ -37,7 +37,7 @@ primefamily(n,d) =
 }
 
 {
-    forprime(p=100000, 999999,
+    forprime(p=10000, 999999,
         n=digits(p);
         m=Map();
         for(i=1,#n, m=mapincr(m,n[i]));
