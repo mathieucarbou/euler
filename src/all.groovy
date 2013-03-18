@@ -14,7 +14,12 @@ new File(".").eachFile {
             try {
                 def proc = [gp, '-q', '-s', '30M', '-p', '2M', it.name].execute()
                 proc.waitFor()
-                print(proc.inputStream.text ?: proc.errorStream.text)
+                def out = proc.inputStream.text ?: proc.errorStream.text
+                if (out) {
+                    print(out)
+                } else {
+                    print('ERROR\n')
+                }
             } catch (e) {
                 println e.message
             }
