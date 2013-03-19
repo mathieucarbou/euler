@@ -4,28 +4,24 @@
 */
 
 {
-    c=0;
-    m=1000000;
-    b=log(10);
-    l=List(primes(primepi(m)));
-    while(#l,
-        if(l[1]<10, c++; listpop(l,1); next());
-        p=10^(floor(log(l[1])/b));
-        qr=[l[1],0];
-        rp=1;
-        while(1,
-            qr=divrem(qr[1],p);
-            if(qr[1]==5 || qr[1]%2==0, listpop(l,1); break());
-            qr[1]=10*qr[2]+qr[1];
-            if(l[1]==qr[1],
-                c+=rp;
-                listpop(l,1);
-                break()
+    b=Set([0,2,4,5,6,8]);
+    c=13;
+    p=List(select(x->x>100, primes(primepi(1000000))));
+    while(#p,
+        d=digits(p[1]);
+        listpop(p, 1);
+        if(#setintersect(Set(d), b)==0,
+            d=List(d);
+            for(i=2,#d,
+                listput(d, d[1]);
+                listpop(d,1);
+                j=setsearch(p, subst(Pol(Vec(d)),'x,10));
+                if(j,
+                    listpop(p, j),
+                    next(2)
+                );
             );
-            i=setsearch(l, qr[1]);
-            if(i==0, listpop(l,1); break());
-            rp++;
-            listpop(l,i);
+            c+=#d;
         );
     );
     print(c);
