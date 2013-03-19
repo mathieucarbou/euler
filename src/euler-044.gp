@@ -9,9 +9,12 @@
         forstep(j=k-1, 1, -1,
             d = p[k] - p[j];
             \\ print("k="k",j="j", d="d", p="p);
-            if(setsearch(p, d) && ispentagonal(p[k] + p[j]),
-                print(d);
-                break(2);
+            if(setsearch(p, d),
+                qr=24*(p[k]+p[j])+1;
+                if((truncate(sqrt(qr))+1)%6==0 && issquare(qr),
+                    print(d);
+                    break(2);
+                );
             );
         );
         k++;
