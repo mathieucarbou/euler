@@ -144,3 +144,10 @@ istriangular(x) =
     qr=divrem(qr,2);
     if(qr[2]==0, qr[1], 0);
 }
+
+triangle(n)   = n*(n+1)/2;
+square(n)     = n^2;
+pentagonal(n) = n*(3*n-1)/2;
+hexagonal(n)  = n*(2*n-1);
+heptagonal(n) = n*(5*n-3)/2;
+octagonal(n)  = n*(3*n-2);
