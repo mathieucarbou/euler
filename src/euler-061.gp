@@ -7,13 +7,27 @@
     The octagonal serie is the shortest so we will iterate over this serie to find in the others numbers starting with the two last digit of current octogonal number
 */
 
-\r euler.gp
+\\ our list of formula to generate polygons
+formula = [n->n*(n+1)/2, n->n^2, n->n*(3*n-1)/2, n->n*(2*n-1), n->n*(5*n-3)/2, n->n*(3*n-2)]
 
-accept(n) = n>1000 && n<9999 && n%100>9
-formula = [triangle, square, pentagonal, hexagonal, heptagonal, octagonal]
-m=#formula
-polygons = vector(m,x,List())
+\\ the polygons generated for each formnula
+polygons = vector(#formula,x,List())
 
+\\ flatten lists of lists into a flat list
+flatten(l) = {
+    my(r, m=#l);
+    if(m==0, return(l));
+    r=List(l);
+    while(m,
+        s=List(r[1]);
+        for(j=1, #s, listput(r, s[j]));
+        listpop(r, 1);
+        m--;
+    );
+    return(Vec(r));
+}
+
+\\ find cycles by beginning by an octogonal number
 cycles(o, idx) = {
     if(#idx==0, return([[o]]));
     my(n, p=List(), ab=(o-(o%100))/100, s=vector(#idx,x,select(p->p%100==ab, polygons[idx[x]])));
@@ -27,23 +41,17 @@ cycles(o, idx) = {
 }
 
 {
-    for(p=1, m,
+    for(p=1, #formula,
         for(n=round(solve(n=0,9999,formula[p](n)-1000)), round(solve(n=0,9999,formula[p](n)-9999)),
             k=formula[p](n);
-            if(accept(k), listput(polygons[p], k))
+            if(k>1000 && k<9999 && k%100>9, listput(polygons[p], k))
         );
         polygons[p] = Set(polygons[p]);
-        printf("%-16s %s\n", formula[p], polygons[p]);
+        \\ printf("%-16s %s\n", formula[p], polygons[p]);
     );
-
-    c=apply(x->cycles(x, vector(m-1,i,i)), polygons[m]);
-    print(c);
-
-    \\for(p=1, #polygons[m],
-    \\    c=cycles(polygons[m][p], vector(m-1,x,x));
-    \\
-    \\    if(#c && polygons[m][p]%100 == (c[1]-(c[1]%100))/100, print(c); break());
-    \\);
+    c=flatten(select(x->x[#formula]%100 == (x[1]-(x[1]%100))/100, flatten(apply(x->cycles(x, vector(#formula-1,i,i)), polygons[#formula]))));
+    \\ print(c);
+    print(sum(x=1,#c, c[x]));
 }
 
 \q

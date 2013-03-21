@@ -151,3 +151,16 @@ pentagonal(n) = n*(3*n-1)/2;
 hexagonal(n)  = n*(2*n-1);
 heptagonal(n) = n*(5*n-3)/2;
 octagonal(n)  = n*(3*n-2);
+
+flatten(l) = {
+    my(r, m=#l);
+    if(m==0, return(l));
+    r=List(l);
+    while(m,
+        s=List(r[1]);
+        for(j=1, #s, listput(r, s[j]));
+        listpop(r, 1);
+        m--;
+    );
+    return(Vec(r));
+}
