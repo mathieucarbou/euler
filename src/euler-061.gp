@@ -14,16 +14,16 @@ formula = [triangle, square, pentagonal, hexagonal, heptagonal, octagonal]
 m=#formula
 polygons = vector(m,x,List())
 
-previous(o, idx) = {
-    if(#idx==0, return([o]));
-    my(n, ab=(o-(o%100))/100, s=vector(#idx,x,select(p->p%100==ab, polygons[idx[x]])));
-    for(i=1,#s,
+cycles(o, idx) = {
+    if(#idx==0, return([[o]]));
+    my(n, p=List(), ab=(o-(o%100))/100, s=vector(#idx,x,select(p->p%100==ab, polygons[idx[x]])));
+    for(i=1, #s,
         for(j=1, #s[i],
-            n=previous(s[i][j], setminus(idx, [idx[i]]));
-            if(#n, return(concat(n, [o])));
+            n=cycles(s[i][j], setminus(idx, [idx[i]]));
+            for(k=1, #n, listput(p, concat(n[k], [o])));
         );
     );
-    return([]);
+    return(Set(p));
 }
 
 {
@@ -36,10 +36,14 @@ previous(o, idx) = {
         printf("%-16s %s\n", formula[p], polygons[p]);
     );
 
-    for(p=1, #polygons[m],
-        c=previous(polygons[m][p], vector(m-1,x,x));
-        if(#c && polygons[m][p]%100 == (c[1]-(c[1]%100))/100, print(c), break());
-    );
+    c=apply(x->cycles(x, vector(m-1,i,i)), polygons[m]);
+    print(c);
+
+    \\for(p=1, #polygons[m],
+    \\    c=cycles(polygons[m][p], vector(m-1,x,x));
+    \\
+    \\    if(#c && polygons[m][p]%100 == (c[1]-(c[1]%100))/100, print(c); break());
+    \\);
 }
 
 \q
