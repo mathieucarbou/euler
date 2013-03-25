@@ -1,0 +1,9 @@
+prompt = "(%H:%M) \e[1mgp\e[m > "
+#if READL prompt = "(%H:%M) \e[1mgp\e[m > "
+#if EMACS prompt = "? "
+prettyprinter = "/usr/local/bin/tex2mail -TeX -noindent -ragged -by_par"
+\\ Stack size : 10^7 Bytes.
+parisize = 30M
+\\ Biggest precomputed prime (= prevprime(10^6))
+primelimit = 2M
+realprecision=250
