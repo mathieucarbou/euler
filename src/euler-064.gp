@@ -3,8 +3,6 @@
     An estimate of the period length can be sqrt(n)*log(n)
 */
 
-\p250
-
 \\ Find the continued fraction and period given a precision
 contfracroot(n, p=20) = {
     c=contfrac(sqrt(n),,p);
