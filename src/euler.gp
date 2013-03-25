@@ -164,3 +164,10 @@ flatten(l) = {
     );
     return(Vec(r));
 }
+
+contfracroot(n, p=20) = {
+    c=contfrac(sqrt(n),,p);
+    if(#c==1, return(c));
+    for(i=2, #c, if(c[i]==2*c[1], return(vecextract(c, Str(1 ".." i)))));
+    error(Str("Cannot find period: increase realprecision (\\p)"));
+}
