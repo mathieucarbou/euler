@@ -34,7 +34,7 @@ fareyleft(n, f) = {
     return(bestNum/bestDenom);
 }
 
-print(fareyleft(10^6,3/7))
+print(numerator(fareyleft(10^6,3/7)))
 
 \q
 
