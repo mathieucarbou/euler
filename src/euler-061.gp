@@ -49,7 +49,7 @@ cycles(o, idx) = {
         polygons[p] = Set(polygons[p]);
         \\ printf("%-16s %s\n", formula[p], polygons[p]);
     );
-    c=flatten(select(x->x[#formula]%100 == (x[1]-(x[1]%100))/100, flatten(apply(x->cycles(x, vector(#formula-1,i,i)), polygons[#formula]))));
+    c=flatten(select(x->x[#formula]%100 == x[1]\100, flatten(apply(x->cycles(x, vector(#formula-1,i,i)), polygons[#formula]))));
     \\ print(c);
     print(sum(x=1,#c, c[x]));
 }
