@@ -10,7 +10,7 @@ Collection<Future> futures = []
 def etime = System.currentTimeMillis()
 
 new File(".").eachFile {
-    if (!(it.name in ['all.groovy', 'euler.groovy', 'euler.gp', 'map.gp'])) {
+    if (!(it.name in ['all.groovy', 'euler.groovy', 'euler.gp', 'map.gp', 'qfsolve.gp'])) {
         if (it.name.endsWith('.groovy')) {
             futures << executor.submit({ File script ->
                 StringWriter out = new StringWriter()
