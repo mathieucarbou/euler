@@ -5,15 +5,36 @@
     * we reduce the bounds each time we find a newer one
 */
 
-{
-    l=2/5;
-    u=3/7;
-    forstep(d=1000000, 2, -1,
-        n=truncate(d*3/7);
-        m=truncate(numerator(l)*d/denominator(l));
-        while(n>m, f=n/d; if(f>l && f<u, l=f); n--);
+\\ {
+\\     l=2/5;
+\\     u=3/7;
+\\     forstep(d=1000000, 2, -1,
+\\         n=truncate(d*3/7);
+\\         m=truncate(numerator(l)*d/denominator(l));
+\\         while(n>m, f=n/d; if(f>l && f<u, l=f); n--);
+\\     );
+\\     print(numerator(l));
+\\ }
+
+/*
+    Returns the fraction on the left of fraction f for Farey sequence n
+*/
+fareyleft(n, f) = {
+    my(bestNum=0, bestDenom=1, currDenom=n, minDenom=1, a=numerator(f), b=denominator(f));
+    while(currDenom>minDenom,
+        currNum=(a*currDenom-1)\b;
+        if(bestNum*currDenom<currNum*bestDenom,
+            bestNum=currNum;
+            bestDenom=currDenom;
+            delta=a*currDenom-b*currNum;
+            minDenom=currDenom\delta+1;
+        );
+        currDenom--;
     );
-    print(numerator(l));
+    return(bestNum/bestDenom);
 }
 
+print(fareyleft(10^6,3/7))
+
 \q
+

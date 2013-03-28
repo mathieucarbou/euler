@@ -165,9 +165,30 @@ flatten(l) = {
     return(Vec(r));
 }
 
+/*
+    Returns the continuous fraction representation period for an irrational number
+*/
 contfracroot(n, p=20) = {
     c=contfrac(sqrt(n),,p);
     if(#c==1, return(c));
     for(i=2, #c, if(c[i]==2*c[1], return(vecextract(c, Str(1 ".." i)))));
     error(Str("Cannot find period: increase realprecision (\\p)"));
+}
+
+/*
+    Returns the fraction on the left of fraction f for Farey sequence n
+*/
+fareyleft(n, f) = {
+    my(bestNum=0, bestDenom=1, currDenom=n, minDenom=1, a=numerator(f), b=denominator(f));
+    while(currDenom>minDenom,
+        currNum=(a*currDenom-1)\b;
+        if(bestNum*currDenom<currNum*bestDenom,
+            bestNum=currNum;
+            bestDenom=currDenom;
+            delta=a*currDenom-b*currNum;
+            minDenom=currDenom\delta+1;
+        );
+        currDenom--;
+    );
+    return(bestNum/bestDenom);
 }
