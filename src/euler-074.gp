@@ -8,26 +8,32 @@ digitfactorialsum(n) = {
     return(m);
 }
 
-m=Map()
-
 {
+    n=Set();
+    c=List();
+    for(i=1, 170,
+        if(!setsearch(n, i),
+            l=List([i]);
+            while(1,
+                s=digitfactorialsum(l[1]);
+                j=setsearch(n, s);
+                if(j,
+                    k=setsearch(n, i, 1);
 
-    for(n=1, 170,
-        l=List([n]);
-        while(1,
-            s=digitfactorialsum(l[#l]);
-            c=mapget(m, s, 0);
-            if(c,
-                m=mapput(m, n, c+#l);
-                print(n " " c+#l " " l " " s);
-            break());
-            if(setsearch(Set(l), s),
-                print(n " " l);
-                while(#l, i=listpop(l,1); m=mapput(m, i, #l+1));
-                print(m);
-                break();
-            );
-            listput(l, s);
+
+                    m=mapput(mc, n, c+#l);
+                    print("F " n " " l " " s " " #l);
+                    print(mc);
+                    break();
+                );
+                if(setsearch(Set(l), s),
+                    print("N " n " " l " " s " " #l);
+                    forstep(i=#l, 1, -1, mc=mapput(mc, l[i], i));
+                    print(mc);
+                    break();
+                );
+                listinsert(l, s, 1);
+            )
         )
     )
 }

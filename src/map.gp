@@ -5,14 +5,14 @@ mapsearch(m,k) = setsearch(m[1],k);
 mapput(m,k,v) =
 {
     my(l, i=setsearch(m[1],k));
-    if(i, m[2][i]=v, i=setsearch(m[1],k,1); m[1]=setunion(m[1],[k]); if(i>#m[2], listput(m[2],v), listinsert(m[2],v,i)));
+    if(i, m[2][i]=v, i=setsearch(m[1],k,1); m[1]=setunion(m[1],[k]); listinsert(m[2],v,i));
     return(m);
 }
 
 mapincr(m,k,v=1) =
 {
     my(l, i=setsearch(m[1],k));
-    if(i, m[2][i]=m[2][i]+v, i=setsearch(m[1],k,1); m[1]=setunion(m[1],[k]); if(i>#m[2], listput(m[2],v), listinsert(m[2],v,i)));
+    if(i, m[2][i]=m[2][i]+v, i=setsearch(m[1],k,1); m[1]=setunion(m[1],[k]); listinsert(m[2],v,i));
     return(m);
 }
 
