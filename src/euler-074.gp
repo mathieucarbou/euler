@@ -9,27 +9,18 @@ digitfactorialsum(n) = {
 }
 
 {
-    n=Set();
-    c=List();
-    for(i=1, 170,
-        if(!setsearch(n, i),
-            l=List([i]);
+    N=Set();
+    C=List();
+    for(n=1, 170,
+        if(!setsearch(N, n),
+            l=List([n]);
             while(1,
                 s=digitfactorialsum(l[1]);
-                j=setsearch(n, s);
-                if(j,
-                    k=setsearch(n, i, 1);
-
-
-                    m=mapput(mc, n, c+#l);
-                    print("F " n " " l " " s " " #l);
-                    print(mc);
-                    break();
-                );
-                if(setsearch(Set(l), s),
-                    print("N " n " " l " " s " " #l);
-                    forstep(i=#l, 1, -1, mc=mapput(mc, l[i], i));
-                    print(mc);
+                c=-1; u=Set(l);
+                if(setsearch(u, s), c=0, k=setsearch(N, s); if(k, c=N[k]));
+                if(c>=0,
+                    N=setunion(N, u);
+                    forstep(i=#l, 1, -1, listinsert(C, c+i, setsearch(N, l[i])));
                     break();
                 );
                 listinsert(l, s, 1);
