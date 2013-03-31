@@ -23,14 +23,12 @@
         => we check numbers of 6-digits <= 354294
 */
 
-\r euler.gp
-
 base=vector(10,i,(i-1)^5)
 
 sumdigpow(n) =
 {
-    my(d=digits(n),ss=0);
-    for(i=1,#d,ss+=base[d[i]+1]);
+    my(ss=0);
+    while(n, ss+=base[(n%10)+1]; n=n\10);
     return(ss);
 }
 
