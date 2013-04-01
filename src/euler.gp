@@ -192,3 +192,5 @@ fareyleft(n, f) = {
     );
     return(bestNum/bestDenom);
 }
+
+berggrens(f, p=[3;4;5]) = my(ABC=[[1,-2,2; 2,-1,2; 2,-2,3], [1,2,2; 2,1,2; 2,2,3], [-1,2,2; -2,1,2; -2,2,3]]); ( r(t) = if(f(t), apply(m->r(m*t),ABC)) ); r(p);

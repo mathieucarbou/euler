@@ -16,24 +16,7 @@
 \\     print(numerator(l));
 \\ }
 
-/*
-    Returns the fraction on the left of fraction f for Farey sequence n
-*/
-fareyleft(n, f) = {
-    my(bestNum=0, bestDenom=1, currDenom=n, minDenom=1, a=numerator(f), b=denominator(f));
-    while(currDenom>minDenom,
-        currNum=(a*currDenom-1)\b;
-        if(bestNum*currDenom<currNum*bestDenom,
-            bestNum=currNum;
-            bestDenom=currDenom;
-            delta=a*currDenom-b*currNum;
-            minDenom=currDenom\delta+1;
-        );
-        currDenom--;
-    );
-    return(bestNum/bestDenom);
-}
-
+\r euler.gp
 print(numerator(fareyleft(10^6,3/7)))
 
 \q
