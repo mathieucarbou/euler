@@ -193,4 +193,28 @@ fareyleft(n, f) = {
     return(bestNum/bestDenom);
 }
 
+\\ http://en.wikipedia.org/wiki/Tree_of_primitive_Pythagorean_triples
 berggrens(f, p=[3;4;5]) = my(ABC=[[1,-2,2; 2,-1,2; 2,-2,3], [1,2,2; 2,1,2; 2,2,3], [-1,2,2; -2,1,2; -2,2,3]]); ( r(t) = if(f(t), apply(m->r(m*t),ABC)) ); r(p);
+
+\\ http://rosettacode.org/wiki/Combinations_with_repetitions
+ways(k,v,s=[])={
+	if(k==0,return([]));
+	if(k==1,return(vector(#v,i,concat(s,[v[i]]))));
+	if(#v==1,return(ways(k-1,v,concat(s,v))));
+	my(u=vecextract(v,2^#v-2));
+	concat(ways(k-1,v,concat(s,[v[1]])),ways(k,u,s))
+};
+
+\\ http://rosettacode.org/wiki/Combinations_with_repetitions
+nways(k,v)=binomial(#v+k-1,k);
+
+\\ http://rosettacode.org/wiki/Pythagorean_triples
+forprimpythagoreans(lim, f)={
+    my(P);
+    for(m=2, sqrtint(lim\2),
+        forstep(n=1+m%2, min(sqrtint(lim-m^2),m-1), 2,
+            P=2*m*(m+n);
+            if(gcd(m,n)==1 && P<=lim, f(m, n, P))
+        )
+    );
+};
