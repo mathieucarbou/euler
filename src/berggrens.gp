@@ -27,3 +27,5 @@ berggrens([], S)
 
 print(C)
 \\ print(T)
+
+\q
