@@ -162,7 +162,7 @@ flatten(l) = {
         listpop(r, 1);
         m--;
     );
-    return(Vec(r));
+    Vec(r);
 }
 
 /*
@@ -218,3 +218,14 @@ forprimpythagoreans(lim, f)={
         )
     );
 };
+
+\\ function to compute combinations without repetitions of k elements amongst set v
+comb(k,v=[]) =
+{
+    if(k<0 || k>#v, error("0 <= k <= #v"));
+    if(k==0, return([]));
+    if(k==1, return(apply(x->[x],v)));
+    if(k==#v, return([v]));
+    ( c(n,kk,r,d) = if(d==kk, [vecextract(v, vecextract(r, (2^kk-1)<<1))], my(s=[]); for(i=r[d+1]+1,n, r[d+2]=i; s=concat(s, c(n,kk,r,d+1))); s) );
+    c(#v,k,vector(#v,i,i-1),0);
+}

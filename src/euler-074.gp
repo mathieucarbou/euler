@@ -5,6 +5,7 @@
 \r euler.gp
 
 F=vector(10,x,(x-1)!)
+
 \\ compute the chain length
 chain(n) = {
     my(l=List(), s);
@@ -16,8 +17,10 @@ chain(n) = {
     );
     l;
 }
+
 \\ combination with repetitions of 6 digits amongst 0-9
 print1(select(n->#chain(n)==60, apply(x->subst(Pol(x),'x,10), ways(6, vector(10,x,x-1)))))
+
 \\ compute possible permutations of found numbers (=> [1479, 223479])
 \\ (1,4,7,9) => 4!
 \\ (0,4,7,9) => 4! (because) 0! == 1!, but we must remove 3! because the arrangement 0(4,7,9) does not apply
