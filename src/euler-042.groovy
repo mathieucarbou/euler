@@ -6,7 +6,7 @@ import static java.lang.Math.sqrt
         n = (sqrt(8*t(n)+1)-1)/2 (an integer x is triangular if and only if 8*t(n)+1 is a square)
 */
 
-def tn = [] as Set
+def tn = new HashSet()
 def count = 0
 new File('../data/euler-042.txt').text.replaceAll(' |"', '').split(',').each {word ->
     int sum = word.chars.inject(0, {s, c -> s + (c as int) - 64})
