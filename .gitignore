@@ -1,6 +1,6 @@
-.idea
-*.iml
-target
-.svn
-~$*
-pari
+/.idea
+/*.iml
+/target
+/.svn
+/~$*
+/pari
