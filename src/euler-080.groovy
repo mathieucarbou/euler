@@ -2,7 +2,7 @@ import org.jgrapht.alg.DijkstraShortestPath
 import org.jgrapht.experimental.dag.DirectedAcyclicGraph
 import org.jgrapht.graph.DefaultWeightedEdge
 
-def matrix = new File('../data/euler-80.txt').readLines().collect { it.split(',').collect { it as double } }
+def matrix = new File('../data/euler-080.txt').readLines().collect { it.split(',').collect { it as double } }
 def graph = new DirectedAcyclicGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge)
 def connect = { String from, String to, double weight ->
     graph.addVertex(from)
