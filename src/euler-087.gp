@@ -5,22 +5,20 @@
 
 {
     M = 50000000;
-    p2 = apply(x->x^2, primes(primepi(sqrtn(M, 2))));
-    p3 = apply(x->x^3, primes(primepi(sqrtn(M, 3))));
-    p4 = apply(x->x^4, primes(primepi(sqrtn(M, 4))));
+    p = apply(p->apply(x->x^p, primes(primepi(sqrtn(M, p)))), [2,3,4]) ;
     L = List();
-    for(A = 1, #p2,
-        for(B = 1, #p3,
-            AB = p2[A] + p3[B];
+    for(A = 1, #p[1],
+        for(B = 1, #p[2],
+            AB = p[1][A] + p[2][B];
             if(AB >= M, break());
-            for(C = 1, #p4,
-                N = AB + p4[C];
+            for(C = 1, #p[3],
+                N = AB + p[3][C];
                 if(N >= M, break());
-                if(!setsearch(L,N), listinsert(L, N, setsearch(L,N,1)));
+                listput(L, N);
             )
         )
     );
-    print(#L);
+    print(#Set(L));
 }
 
 \q
