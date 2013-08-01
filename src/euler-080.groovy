@@ -17,4 +17,4 @@ connect '79,79', 'end', matrix[79][79]
         if (c < 79) connect((r + ',' + c), (r + ',' + (c + 1)), matrix[r][c])
     }
 }
-println new DijkstraShortestPath<String, DefaultWeightedEdge>(graph, 'start', 'end').pathLength
+println new DijkstraShortestPath<String, DefaultWeightedEdge>(graph, 'start', 'end').pathLength as int
