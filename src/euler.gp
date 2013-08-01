@@ -229,3 +229,21 @@ comb(k,v=[]) =
     ( c(n,kk,r,d) = if(d==kk, [vecextract(v, vecextract(r, (2^kk-1)<<1))], my(s=[]); for(i=r[d+1]+1,n, r[d+2]=i; s=concat(s, c(n,kk,r,d+1))); s) );
     c(#v,k,vector(#v,i,i-1),0);
 }
+
+\\ http://rosettacode.org/wiki/Permutations/Derangements#PARI.2FGP
+derangements(n)=if(n,round(n!/exp(1)),1);
+derange(n)={
+	my(v=[[]],tmp);
+	for(level=1,n,
+		tmp=List();
+		for(i=1,#v,
+			for(k=1,n,
+				if(k==level, next);
+				for(j=1,level-1,if(v[i][j]==k, next(2)));
+				listput(tmp, concat(v[i],k))
+			)
+		);
+		v=Vec(tmp)
+	);
+	v
+};
