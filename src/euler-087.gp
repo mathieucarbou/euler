@@ -3,17 +3,24 @@
     N = A + B + C where A, B and C are 2, 3 and 4 powers
 */
 
-\r euler.gp
-p=apply(x -> [x, x^2, x^3, x^4], primes(primepi(sqrt(50000000))))
-print(p)
-N=List()
-for(A=1, #p, for(B=1, #p, for(C=1, #p, listput(N, p[A][2] + p[B][3] + p[C][4]) )))
-print(#Set(N))
-
-\\print(comb(3, p))
-\\ print(mynumtoperm(#p, 0))
-\\ print(ways(3, p))
-\\ print(vector(3!,k,numtoperm(4,k)))
-\\ print(Set(apply(p -> p[1]^2 + p[2]^3 + p[3]^4, ways(3, p))))
+{
+    M = 50000000;
+    p2 = apply(x->x^2, primes(primepi(sqrtn(M, 2))));
+    p3 = apply(x->x^3, primes(primepi(sqrtn(M, 3))));
+    p4 = apply(x->x^4, primes(primepi(sqrtn(M, 4))));
+    L = List();
+    for(A = 1, #p2,
+        for(B = 1, #p3,
+            AB = p2[A] + p3[B];
+            if(AB >= M, break());
+            for(C = 1, #p4,
+                N = AB + p4[C];
+                if(N >= M, break());
+                if(!setsearch(L,N), listinsert(L, N, setsearch(L,N,1)));
+            )
+        )
+    );
+    print(#L);
+}
 
 \q
