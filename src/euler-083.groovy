@@ -9,16 +9,15 @@ def connect = { String from, String to, double weight ->
     graph.addVertex(to)
     graph.setEdgeWeight(graph.addEdge(from, to), weight)
 }
+connect 'start', '0,0', 0.0
+connect '79,79', 'end', matrix[79][79]
 (0..79).each { r ->
     (0..79).each { c ->
         String v = r + ',' + c
-        if (c == 0) connect('start', v, 0.0)
-        if (c == 79) connect(v, 'end', matrix[r][c])
+        if (c > 0) connect(v, r + ',' + (c - 1), matrix[r][c])
         if (c < 79) connect(v, r + ',' + (c + 1), matrix[r][c])
-        if (r < 79) connect(v, (r + 1) + ',' + c, matrix[r][c])
         if (r > 0) connect(v, (r - 1) + ',' + c, matrix[r][c])
+        if (r < 79) connect(v, (r + 1) + ',' + c, matrix[r][c])
     }
 }
 println new DijkstraShortestPath<String, DefaultWeightedEdge>(graph, 'start', 'end').pathLength as int
-
-//TODO
