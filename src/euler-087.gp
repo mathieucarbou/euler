@@ -1,18 +1,19 @@
 /*
-    primes < sqrtn(50000000,4)
-    Greatest prime is 83 and 83^4+83^3+83^2 < 50000000.
+    primes < sqrt(50000000)
+    N = A + B + C where A, B and C are 2, 3 and 4 powers
 */
 
 \r euler.gp
-n=primepi(sqrtn(50000000,4))
-print(n " " n^3)
-p=primes(n)
+p=apply(x -> [x, x^2, x^3, x^4], primes(primepi(sqrt(50000000))))
 print(p)
+N=List()
+for(A=1, #p, for(B=1, #p, for(C=1, #p, listput(N, p[A][2] + p[B][3] + p[C][4]) )))
+print(#Set(N))
 
-print(mynumtoperm(#p, 0))
-print(ways(3, p))
-print(comb(3, p))
-print(vector(3!,k,numtoperm(4,k)))
-print(Set(apply(p -> p[1]^2 + p[2]^3 + p[3]^4, ways(3, p))))
+\\print(comb(3, p))
+\\ print(mynumtoperm(#p, 0))
+\\ print(ways(3, p))
+\\ print(vector(3!,k,numtoperm(4,k)))
+\\ print(Set(apply(p -> p[1]^2 + p[2]^3 + p[3]^4, ways(3, p))))
 
 \q
