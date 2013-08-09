@@ -98,20 +98,24 @@ getKmin(N) = {
 }
 
 {
-    NK=vector(12000);
-    NK[2]=4;
+    NK=vector(12000,x,List());
     for(N=4, nextprime(truncate(sqrt(#NK))) * nextprime(truncate(sqrt(#NK))+1),
         if(isprime(N), next());
         Kmin=getKmin(N);
         Kmax=getKmax(N);
         print(N " Kmin=" Kmin ", Kmax=" Kmax);
-        for(i=Kmin, min(#NK, Kmax),
-            if(!NK[i] || NK[i] > N, NK[i]=N);
-        );
-        if(Kmin <= #NK && (!NK[Kmin] || NK[Kmin] > N), NK[Kmin]=N);
-        if(Kmax <= #NK && (!NK[Kmax] || NK[Kmax] > N), NK[Kmax]=N);
+        if(Kmin <= #NK, listput(NK[Kmin], N));
+        if(Kmax <= #NK, listput(NK[Kmax], N));
+        \\for(i=Kmin, min(#NK, Kmax),
+            \\if(!NK[i] || NK[i] > N, NK[i]=N);
+            \\if(!NK[i], NK[i]=N);
+        \\);
+        \\if(Kmin <= #NK && (!NK[Kmin] || NK[Kmin] > N), NK[Kmin]=N);
+        \\if(Kmax <= #NK && (!NK[Kmax] || NK[Kmax] > N), NK[Kmax]=N);
         \\if(Kmax <= #NK, NK[Kmax]=N);
     );
+
+    NK=apply(x -> if(#x, Set(x)[1], 0), NK);
     print(NK);
     S=Set(NK);
     print(sum(i=1,#S,S[i]));
